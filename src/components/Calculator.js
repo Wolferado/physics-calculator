@@ -2,6 +2,7 @@ import '../styles/Calculator.css';
 import {useState} from 'react';
 import CalculatorInput from './CalculatorInput';
 import CalculatorSelect from './CalculatorSelect';
+import CalculatorOutput from './CalculatorOutput';
 
 const stjudentCoefficients = {
   0.70: [1.96, 1.39, 1.25, 1.19, 1.16, 1.13, 1.12, 1.11, 1.10, 1.09, 1.09, 1.08, 1.08, 1.08, 1.07, 1.07, 1.07, 1.07, 1.06, 1.06, 1.06, 1.06, 1.06, 1.06, 1.04],
@@ -18,18 +19,34 @@ function Calculator() {
   const [measurementMin, setMeasurementMin] = useState(0);
   const [measuresAverageValue, setMeasuresAverageValue] = useState(0);
   const [squaredError, setSquaredError] = useState(0);
+  const [randomError, setRandomError] = useState(0);
+  const [systematicError, setSystematicError] = useState(0);
+  const [absoluteError, setAbsoluteError] = useState(0);
+  const [relativeError, setRelativeError] = useState(0);
 
   let measuresInputs = [Array.from({length: measuresAmount}, (_, i) => i + 1).map((measure) => <CalculatorInput index={measure} handleChange={e => getAverageValueFromMeasures()}/>)];
 
-  const getAverageValueFromMeasures = () => {
-    let averageValue = 0;
+  const getInputValues = () => {
     let inputs = document.querySelectorAll(".Calculator > input");
+    let arr = [];
 
     for(let i = 0; i < inputs.length; i++) {
       if(isNaN(parseFloat(inputs[i].value)))
-        averageValue += 0;
+        arr.push(0);
       else
-        averageValue += parseFloat(inputs[i].value);
+        arr.push(parseFloat(inputs[i].value));
+    }
+
+    return arr;
+  }
+
+  const getAverageValueFromMeasures = () => {
+    let averageValue = 0;
+    
+    let arr = getInputValues();
+
+    for(let i = 0; i < arr.length; i++) {
+      averageValue += arr[i];
     }
 
     setMeasuresAverageValue(averageValue / measuresAmount);
@@ -37,27 +54,49 @@ function Calculator() {
 
   const getSquaredError = (averageValue, amountOfValues) => {
     let error = 0;
-    let inputs = document.querySelectorAll(".Calculator > input");
 
-    for(let i = 0; i < inputs.length; i++) {
-      if(isNaN(parseFloat(inputs[i].value)))
-        error += Math.pow(0 - averageValue, 2);
-      else {
-        let result = parseFloat(inputs[i].value) - averageValue;
-        error += Math.pow(result, 2);
-      }
+    let arr = getInputValues();
+
+    for(let i = 0; i < arr.length; i++) {
+      let result = parseFloat(arr[i]) - averageValue;
+      error += Math.pow(result, 2);
     }
 
     setSquaredError(Math.sqrt(error / (amountOfValues * (amountOfValues - 1))));
   }
 
+  const getRandomError = () => {
+    let error = squaredError * stjudentCoefficients[stjudentCoef][measuresAmount - 1];
+
+    setRandomError(error);
+  }
+
+  const getSystematicError = () => {
+    let error = measurementMin / 3 * stjudentCoefficients[stjudentCoef][24];
+
+    setSystematicError(error);
+  }
+
+  const getAbsoluteError = () => {
+    let error = Math.sqrt(Math.pow(absoluteError, 2) + Math.pow(systematicError, 2));
+
+    setAbsoluteError(error);
+  }
+
+  const getRelativeError = () => {
+    let error = absoluteError / measuresAverageValue * 100;
+
+    setRelativeError(error);
+  }
+
   const makeMathOperations = () => {
     getAverageValueFromMeasures();
     getSquaredError(measuresAverageValue, measuresAmount);
-    console.log("Avg: " + measuresAverageValue);
-    console.log("Sqrt Error: " + squaredError);
-    console.log("Gad. Error: " + (squaredError * stjudentCoefficients[stjudentCoef][measuresAmount - 1]));
-    console.log("Sist. Error: " + (measurementMin / 3 * stjudentCoefficients[stjudentCoef][24]));
+    getRandomError();
+    getSystematicError();
+    getAbsoluteError();
+    getRelativeError();
+    return <CalculatorOutput amountOfMeasures={measuresAmount} measures={getInputValues} averageValue={measuresAverageValue}/>;
   }
 
   return (
