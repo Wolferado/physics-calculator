@@ -1,12 +1,23 @@
 function CalculatorInput(props) {
-    const labelName = 'Measure №' + props.index;
+
+    if(props.index) {
+        const labelName = 'measure-' + props.index;
     
-    return(
-        <>
-            <label htmlFor={labelName}>{props.index}. mērījums</label>
-            <input type='number' name={props.index} placeholder='Ievadiet vērtību šeit'/>
-        </>
-    )
+        return(
+            <>
+                <label htmlFor={labelName}>{props.index}. mērījums</label>
+                <input type='number' name={labelName} onChange={props.handleChange} placeholder='Ievadiet vērtību šeit'/>
+            </>
+        )
+    }
+    else {
+        return(
+            <>
+                <label htmlFor={props.labelName}>{props.labelValue}</label>
+                <input type='number' name={props.labelName} onChange={props.handleChange} placeholder='Ievadiet vērtību šeit'/>
+            </>
+        )
+    }
 }
 
 export default CalculatorInput;

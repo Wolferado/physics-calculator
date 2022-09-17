@@ -1,3 +1,30 @@
 .Calculator {
   background-color: gray;
+  border-radius: 5px;
+  width: 60%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 10% 20% 10% 20%;
+  padding: 20px;
+}
+.Calculator div {
+  display: flex;
+}
+.Calculator label {
+  font-size: 32px;
+}
+.Calculator select {
+  font-size: 24px;
+  border-radius: 5px;
+}
+.Calculator select option {
+  font-size: 14px;
+  display: flex;
+  position: absolute;
+  left: 200px;
+}
+.Calculator input {
+  font-size: 24px;
+  border-radius: 5px;
 }/*# sourceMappingURL=Calculator.css.map */

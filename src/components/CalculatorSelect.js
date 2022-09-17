@@ -3,7 +3,7 @@ function CalculatorSelect(props) {
 
     return(
         <>
-            <label htmlFor={props.labelId}>{props.labelValue}</label>
+            <label htmlFor={props.labelId}>{props.labelName}</label>
             <select name={props.labelId} id={props.labelId} onChange={props.handleChange}>
                 {selectOptions}
             </select>

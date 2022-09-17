@@ -15,16 +15,74 @@ measuresAmounts.push("Inf");
 function Calculator() {
   const [stjudentCoef, setStjudentCoef] = useState(0.70);
   const [measuresAmount, setMeasuresAmount] = useState(2); 
+  const [measurementMin, setMeasurementMin] = useState(0);
+  const [measuresAverageValue, setMeasuresAverageValue] = useState(0);
+  const [squaredError, setSquaredError] = useState(0);
 
-  let measturesInputs = [Array.from({length: measuresAmount}, (_, i) => i + 1).map((measure) => <CalculatorInput index={measure} />)];
+  let measuresInputs = [Array.from({length: measuresAmount}, (_, i) => i + 1).map((measure) => <CalculatorInput index={measure} handleChange={e => getAverageValueFromMeasures()}/>)];
+
+  const getAverageValueFromMeasures = () => {
+    let averageValue = 0;
+    let inputs = document.querySelectorAll(".Calculator > input");
+
+    for(let i = 0; i < inputs.length; i++) {
+      if(isNaN(parseFloat(inputs[i].value)))
+        averageValue += 0;
+      else
+        averageValue += parseFloat(inputs[i].value);
+    }
+
+    setMeasuresAverageValue(averageValue / measuresAmount);
+  }
+
+  const getSquaredError = (averageValue, amountOfValues) => {
+    let error = 0;
+    let inputs = document.querySelectorAll(".Calculator > input");
+
+    for(let i = 0; i < inputs.length; i++) {
+      if(isNaN(parseFloat(inputs[i].value)))
+        error += Math.pow(0 - averageValue, 2);
+      else {
+        let result = parseFloat(inputs[i].value) - averageValue;
+        error += Math.pow(result, 2);
+      }
+    }
+
+    setSquaredError(Math.sqrt(error / (amountOfValues * (amountOfValues - 1))));
+  }
+
+  const makeMathOperations = () => {
+    getAverageValueFromMeasures();
+    getSquaredError(measuresAverageValue, measuresAmount);
+    console.log("Avg: " + measuresAverageValue);
+    console.log("Sqrt Error: " + squaredError);
+    console.log("Gad. Error: " + (squaredError * stjudentCoefficients[stjudentCoef][measuresAmount - 1]));
+    console.log("Sist. Error: " + (measurementMin / 3 * stjudentCoefficients[stjudentCoef][24]));
+  }
 
   return (
     <div className="Calculator">
-      <CalculatorSelect labelId='stjudent-coef' labelValue='Stjudenta koeficients' options={Object.keys(stjudentCoefficients)} handleChange={e => setStjudentCoef(e.target.value)}/>
-      <CalculatorSelect labelId='measures-amount' labelValue='Mērījumu skaits' options={measuresAmounts} handleChange={e => setMeasuresAmount(e.target.value)}/>
-      {measturesInputs}
+      <div>
+        <CalculatorSelect labelId='stjudent-coef' labelName='Stjudenta koeficients' options={Object.keys(stjudentCoefficients)} handleChange={e => setStjudentCoef(e.target.value)}/>
+        <CalculatorSelect labelId='measures-amount' labelName='Mērījumu skaits' options={measuresAmounts} handleChange={e => setMeasuresAmount(e.target.value)}/>
+        <CalculatorInput labelName='measurement-min-value' labelValue='Mērinstrumenta mazākā iedaļas vērtība' handleChange={e => setMeasurementMin(e.target.value)} />
+      </div>
+      {measuresInputs}
+      <button type='submit' onClick={makeMathOperations}>Click me</button>
     </div>
   );
 }
+
+/*
+  TODO:
+  ### 
+  1. Get average value from all inputs. ---- DONE
+  2. Get squared error (kvadratiska kluda). ---- DONE
+  3. Get "Merijuma absoluta kluda (gadijuma)" (squared error * stjudent coef) --- DONE
+  4. Get "Merijuma absoluta kluda (sistematiska)" --- DONE
+
+  BUGS:
+  - Values don't change, when changing measures amount.
+*/
 
 export default Calculator;
