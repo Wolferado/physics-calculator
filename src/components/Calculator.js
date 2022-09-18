@@ -17,14 +17,13 @@ function Calculator() {
   const [stjudentCoef, setStjudentCoef] = useState(0.70);
   const [measuresAmount, setMeasuresAmount] = useState(2); 
   const [measurementMin, setMeasurementMin] = useState(0);
+
   const [measuresAverageValue, setMeasuresAverageValue] = useState(0);
   const [squaredError, setSquaredError] = useState(0);
   const [randomError, setRandomError] = useState(0);
   const [systematicError, setSystematicError] = useState(0);
   const [absoluteError, setAbsoluteError] = useState(0);
   const [relativeError, setRelativeError] = useState(0);
-
-  let measuresInputs = [Array.from({length: measuresAmount}, (_, i) => i + 1).map((measure) => <CalculatorInput index={measure} handleChange={e => getAverageValueFromMeasures()}/>)];
 
   const getInputValues = () => {
     let inputs = document.querySelectorAll(".Calculator > input");
@@ -41,28 +40,28 @@ function Calculator() {
   }
 
   const getAverageValueFromMeasures = () => {
-    let averageValue = 0;
+    let sum = 0;
     
     let arr = getInputValues();
 
     for(let i = 0; i < arr.length; i++) {
-      averageValue += arr[i];
+      sum += parseFloat(arr[i]);
     }
 
-    setMeasuresAverageValue(averageValue / measuresAmount);
+    setMeasuresAverageValue(sum / measuresAmount);
   }
 
-  const getSquaredError = (averageValue, amountOfValues) => {
+  const getSquaredError = () => {
     let error = 0;
 
     let arr = getInputValues();
 
     for(let i = 0; i < arr.length; i++) {
-      let result = parseFloat(arr[i]) - averageValue;
+      let result = parseFloat(arr[i]) - measuresAverageValue;
       error += Math.pow(result, 2);
     }
 
-    setSquaredError(Math.sqrt(error / (amountOfValues * (amountOfValues - 1))));
+    setSquaredError(Math.sqrt(error / (measuresAmount * (measuresAmount - 1))));
   }
 
   const getRandomError = () => {
@@ -78,7 +77,14 @@ function Calculator() {
   }
 
   const getAbsoluteError = () => {
-    let error = Math.sqrt(Math.pow(absoluteError, 2) + Math.pow(systematicError, 2));
+    let error = 0;
+
+    if(randomError / systematicError >= 3)
+      error = randomError;
+    else if(systematicError / randomError >= 3)
+      error = systematicError;
+    else
+      error = Math.sqrt(Math.pow(randomError, 2) + Math.pow(systematicError, 2));
 
     setAbsoluteError(error);
   }
@@ -91,13 +97,16 @@ function Calculator() {
 
   const makeMathOperations = () => {
     getAverageValueFromMeasures();
-    getSquaredError(measuresAverageValue, measuresAmount);
+    getSquaredError();
     getRandomError();
     getSystematicError();
     getAbsoluteError();
     getRelativeError();
-    return <CalculatorOutput amountOfMeasures={measuresAmount} measures={getInputValues} averageValue={measuresAverageValue}/>;
   }
+  
+  let measuresInputs = [Array.from({length: measuresAmount}, (_, i) => i + 1).map((measure) => <CalculatorInput index={measure} handleChange={e => makeMathOperations()}/>)];
+
+  let outputWindow = <CalculatorOutput stjudentCoef={stjudentCoef} measurementMin={measurementMin} measures={getInputValues} amount={measuresAmount} maxCoefValue={stjudentCoefficients[stjudentCoef][24]} averageValue={measuresAverageValue} squaredError={squaredError} randomError={randomError} systematicError={systematicError} absoluteError={absoluteError} relativeError={relativeError}/>
 
   return (
     <div className="Calculator">
@@ -107,19 +116,12 @@ function Calculator() {
         <CalculatorInput labelName='measurement-min-value' labelValue='Mērinstrumenta mazākā iedaļas vērtība' handleChange={e => setMeasurementMin(e.target.value)} />
       </div>
       {measuresInputs}
-      <button type='submit' onClick={makeMathOperations}>Click me</button>
+      {outputWindow}
     </div>
   );
 }
 
 /*
-  TODO:
-  ### 
-  1. Get average value from all inputs. ---- DONE
-  2. Get squared error (kvadratiska kluda). ---- DONE
-  3. Get "Merijuma absoluta kluda (gadijuma)" (squared error * stjudent coef) --- DONE
-  4. Get "Merijuma absoluta kluda (sistematiska)" --- DONE
-
   BUGS:
   - Values don't change, when changing measures amount.
 */

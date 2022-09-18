@@ -31,4 +31,17 @@
         font-size: 24px;
         border-radius: 5px;
     }
+
+    .output-formulas-container {
+        display: flex;
+        flex-direction: column;
+        p {
+            font-size: 20px;
+            font-weight: 500;
+            line-height:5vh;
+            background-color: white;
+            border-radius: 5px;
+            padding: 5px;
+        }
+    }
 }
