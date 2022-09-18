@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/physics-calculator/static/css/main.5f46f7a6.css",
+    "main.js": "/physics-calculator/static/js/main.163f0e99.js",
+    "index.html": "/physics-calculator/index.html",
+    "main.5f46f7a6.css.map": "/physics-calculator/static/css/main.5f46f7a6.css.map",
+    "main.163f0e99.js.map": "/physics-calculator/static/js/main.163f0e99.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5f46f7a6.css",
+    "static/js/main.163f0e99.js"
+  ]
+}
