@@ -33,8 +33,9 @@
     }
 
     .output-formulas-container {
-        display: flex;
+        display: none;
         flex-direction: column;
+    
         p {
             font-size: 20px;
             font-weight: 500;

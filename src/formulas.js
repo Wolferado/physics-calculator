@@ -1,19 +1,17 @@
-import {useState} from 'react';
-
-const AverageFormula = (props) => {
-    const [sum, setSum] = useState(0);
+const averageFormula = (props) => {
+    let sum = 0;
 
     for(let i = 0; i < props.measures.length; i++) {
-        setSum(sum + props.measures[i]);
+        sum += props.measures[i];
     }
 
-    return("\\(m_{vid}= \\frac{1}{"+props.amount+"} \\sum_{i=1}^{"+props.amount+"}\\ m_i= \\frac{"+sum+"}{"+props.amount+"} = "+props.averageValue+" \\)");
+    return("\\(m_{vid}= \\frac{1}{"+props.amount+"} \\sum_{i=1}^{"+props.amount+"}\\ m_i= \\frac{"+parseFloat(sum)+"}{"+props.amount+"} = "+props.averageValue+" \\)");
 }
-const SquaredErrorFormula = (props) => {
-    const [sum, setSum] = useState(0);
+const squaredErrorFormula = (props) => {
+    let sum = 0;
 
     for(let i = 0; i < props.measures.length; i++) {
-        setSum(sum + (props.measures[i] - props.averageValue));
+        sum += (props.measures[i] - props.averageValue);
     }
 
     return("\\(s_m = \\sqrt{\\frac{sum_{i=1}^{"+props.amount+"}(m_i - m_{vid})^2}{"+props.amount+"("+props.amount+"-1)}}= \\sqrt\\frac{"+sum+"}{"+(props.amount * (props.amount - 1))+"} = "+props.squaredError+"\\)");
@@ -32,7 +30,7 @@ const absoluteErrorFormula = (props) => {
 }
 
 const relativeErrorFormula = (props) => {
-    return("\\(ε_m = \\frac{△m}{m_{vid}} * 100 = \\frac{"+props.absoluteError+"}{"+props.averageValue+"}*100% = "+props.relativeError+" \\)");
+    return("\\(ε_m = \\frac{△m}{m_{vid}} * 100 = \\frac{"+props.absoluteError+"}{"+props.averageValue+"} = "+props.relativeError+" \\)");
 }
 
 /*
@@ -45,6 +43,6 @@ const relativeErrorFormula = (props) => {
 \\(ε_m = \\frac{△m}{m_{vid}} * 100 = \\frac{abs}{avg} = rel \\)
 */
 
-const formulas = {AverageFormula, SquaredErrorFormula, randomErrorFormula, systematicErrorFormula, absoluteErrorFormula, relativeErrorFormula};
+const formulas = {averageFormula, squaredErrorFormula, randomErrorFormula, systematicErrorFormula, absoluteErrorFormula, relativeErrorFormula};
 
 export default formulas;

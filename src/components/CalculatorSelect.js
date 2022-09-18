@@ -1,5 +1,5 @@
 function CalculatorSelect(props) {
-    let selectOptions = props.options.map((opt) => <option name={opt}>{opt}</option>);
+    let selectOptions = props.options.map((opt) => <option key={opt} name={opt}>{opt}</option>);
 
     return(
         <>

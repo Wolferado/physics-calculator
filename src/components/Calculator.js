@@ -16,7 +16,7 @@ measuresAmounts.push("Inf");
 function Calculator() {
   const [stjudentCoef, setStjudentCoef] = useState(0.70);
   const [measuresAmount, setMeasuresAmount] = useState(2); 
-  const [measurementMin, setMeasurementMin] = useState(0);
+  const [measurementMin, setMeasurementMin] = useState(0.001);
 
   const [measuresAverageValue, setMeasuresAverageValue] = useState(0);
   const [squaredError, setSquaredError] = useState(0);
@@ -67,13 +67,13 @@ function Calculator() {
   const getRandomError = () => {
     let error = squaredError * stjudentCoefficients[stjudentCoef][measuresAmount - 1];
 
-    setRandomError(error);
+    setRandomError(parseFloat(error));
   }
 
   const getSystematicError = () => {
     let error = measurementMin / 3 * stjudentCoefficients[stjudentCoef][24];
 
-    setSystematicError(error);
+    setSystematicError(parseFloat(error));
   }
 
   const getAbsoluteError = () => {
@@ -86,13 +86,13 @@ function Calculator() {
     else
       error = Math.sqrt(Math.pow(randomError, 2) + Math.pow(systematicError, 2));
 
-    setAbsoluteError(error);
+    setAbsoluteError(parseFloat(error));
   }
 
   const getRelativeError = () => {
     let error = absoluteError / measuresAverageValue * 100;
 
-    setRelativeError(error);
+    setRelativeError(parseFloat(error));
   }
 
   const makeMathOperations = () => {
@@ -102,9 +102,14 @@ function Calculator() {
     getSystematicError();
     getAbsoluteError();
     getRelativeError();
+
+    document.querySelector(".output-formulas-container").style.display = "flex";
+
+    // NOTE: Right numbers, left only to display in output window
+    console.log(measuresAverageValue, squaredError, randomError, systematicError, absoluteError, relativeError);
   }
   
-  let measuresInputs = [Array.from({length: measuresAmount}, (_, i) => i + 1).map((measure) => <CalculatorInput index={measure} handleChange={e => makeMathOperations()}/>)];
+  let measuresInputs = [Array.from({length: measuresAmount}, (_, i) => i + 1).map((measure) => <CalculatorInput index={measure} />)];
 
   let outputWindow = <CalculatorOutput stjudentCoef={stjudentCoef} measurementMin={measurementMin} measures={getInputValues} amount={measuresAmount} maxCoefValue={stjudentCoefficients[stjudentCoef][24]} averageValue={measuresAverageValue} squaredError={squaredError} randomError={randomError} systematicError={systematicError} absoluteError={absoluteError} relativeError={relativeError}/>
 
@@ -116,6 +121,7 @@ function Calculator() {
         <CalculatorInput labelName='measurement-min-value' labelValue='Mērinstrumenta mazākā iedaļas vērtība' handleChange={e => setMeasurementMin(e.target.value)} />
       </div>
       {measuresInputs}
+      <button id="btn-count" onClick={makeMathOperations}>Aprēķināt</button>
       {outputWindow}
     </div>
   );

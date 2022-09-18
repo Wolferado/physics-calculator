@@ -29,7 +29,7 @@
   border-radius: 5px;
 }
 .Calculator .output-formulas-container {
-  display: flex;
+  display: none;
   flex-direction: column;
 }
 .Calculator .output-formulas-container p {

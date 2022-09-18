@@ -14,7 +14,7 @@ function CalculatorInput(props) {
         return(
             <>
                 <label htmlFor={props.labelName}>{props.labelValue}</label>
-                <input type='number' name={props.labelName} min={0.001} onChange={props.handleChange} placeholder='Ievadiet vērtību šeit'/>
+                <input type='number' name={props.labelName} defaultValue={0.001} onChange={props.handleChange} placeholder='Ievadiet vērtību šeit'/>
             </>
         )
     }
