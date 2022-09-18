@@ -14,8 +14,8 @@ const measuresAmounts = Array.from({length: 24}, (_, i) => i + 2);
 measuresAmounts.push("Inf");
 
 function Calculator() {
-  const [stjudentCoef, setStjudentCoef] = useState(0.70);
-  const [measuresAmount, setMeasuresAmount] = useState(2); 
+  const [stjudentCoef, setStjudentCoef] = useState(0.95);
+  const [measuresAmount, setMeasuresAmount] = useState(5); 
   const [measurementMin, setMeasurementMin] = useState(0.001);
 
   const [measuresAverageValue, setMeasuresAverageValue] = useState(0);
@@ -104,24 +104,25 @@ function Calculator() {
     getRelativeError();
 
     document.querySelector(".output-formulas-container").style.display = "flex";
+    //document.querySelector(".output-formulas-container p").textContent = "";
 
     // NOTE: Right numbers, left only to display in output window
     console.log(measuresAverageValue, squaredError, randomError, systematicError, absoluteError, relativeError);
   }
   
-  let measuresInputs = [Array.from({length: measuresAmount}, (_, i) => i + 1).map((measure) => <CalculatorInput index={measure} />)];
+  let measuresInputs = [Array.from({length: measuresAmount}, (_, i) => i + 1).map((measure) => <CalculatorInput key={measure} index={measure} />)];
 
   let outputWindow = <CalculatorOutput stjudentCoef={stjudentCoef} measurementMin={measurementMin} measures={getInputValues} amount={measuresAmount} maxCoefValue={stjudentCoefficients[stjudentCoef][24]} averageValue={measuresAverageValue} squaredError={squaredError} randomError={randomError} systematicError={systematicError} absoluteError={absoluteError} relativeError={relativeError}/>
 
   return (
     <div className="Calculator">
       <div>
-        <CalculatorSelect labelId='stjudent-coef' labelName='Stjudenta koeficients' options={Object.keys(stjudentCoefficients)} handleChange={e => setStjudentCoef(e.target.value)}/>
-        <CalculatorSelect labelId='measures-amount' labelName='Mērījumu skaits' options={measuresAmounts} handleChange={e => setMeasuresAmount(e.target.value)}/>
+        <CalculatorSelect labelId='stjudent-coef' labelName='Stjudenta koeficients' default={0.95} options={Object.keys(stjudentCoefficients)} handleChange={e => setStjudentCoef(e.target.value)}/>
+        <CalculatorSelect labelId='measures-amount' labelName='Mērījumu skaits' default={5} options={measuresAmounts} handleChange={e => setMeasuresAmount(e.target.value)}/>
         <CalculatorInput labelName='measurement-min-value' labelValue='Mērinstrumenta mazākā iedaļas vērtība' handleChange={e => setMeasurementMin(e.target.value)} />
       </div>
       {measuresInputs}
-      <button id="btn-count" onClick={makeMathOperations}>Aprēķināt</button>
+      <button onClick={makeMathOperations}>Aprēķināt</button>
       {outputWindow}
     </div>
   );

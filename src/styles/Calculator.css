@@ -5,14 +5,16 @@
   height: 80%;
   display: flex;
   flex-direction: column;
-  margin: 10% 20% 10% 20%;
+  margin: 1% 20% 10% 20%;
   padding: 20px;
 }
 .Calculator div {
   display: flex;
+  text-align: center;
 }
 .Calculator label {
-  font-size: 32px;
+  font-size: 24px;
+  padding: 5px;
 }
 .Calculator select {
   font-size: 24px;
@@ -26,6 +28,7 @@
 }
 .Calculator input {
   font-size: 24px;
+  padding: 5px;
   border-radius: 5px;
 }
 .Calculator .output-formulas-container {
@@ -39,4 +42,14 @@
   background-color: white;
   border-radius: 5px;
   padding: 5px;
+}
+.Calculator button {
+  font-size: 30px;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+.Calculator button:hover {
+  background-color: whitesmoke;
+  border: 2px solid white;
 }/*# sourceMappingURL=Calculator.css.map */
