@@ -96,12 +96,12 @@ function Calculator() {
     getRelativeError();
 
     document.querySelector(".output-formulas-container").style.display = "flex";
-    document.querySelector(".output-formulas-container p").textContent = 
-    "Vidējā aritmētiskā kļūda: " + averageFormula(measures, measuresAmount, measuresAverageValue) +"\n"+ 
-    "Vidējā kvadrātiskā kļūda: " + squaredErrorFormula(measures, measuresAmount, measuresAverageValue, squaredError) + "\n" +
-    "Mērījuma absolūta kļūda (gadījuma kļūda): " + randomErrorFormula(stjudentCoef, squaredError, randomError) + "\n" +
-    "Mērījuma absolūte kļūda (sistemātiskā kļūda): " + systematicErrorFormula(measurementMin, stjudentCoefficients[stjudentCoef][24], systematicError) + "\n" +
-    "Mērījuma galīgā absolūta kļūda: " + absoluteErrorFormula(absoluteError) + "\n" +
+    document.querySelector(".output-formulas-container p").innerHTML = 
+    "Vidējā aritmētiskā kļūda: " + averageFormula(measures, measuresAmount, measuresAverageValue) +"<br />"+ 
+    "Vidējā kvadrātiskā kļūda: " + squaredErrorFormula(measures, measuresAmount, measuresAverageValue, squaredError) + "<br />" +
+    "Mērījuma absolūta kļūda (gadījuma kļūda): " + randomErrorFormula(stjudentCoef, squaredError, randomError) + "<br />" +
+    "Mērījuma absolūte kļūda (sistemātiskā kļūda): " + systematicErrorFormula(measurementMin, stjudentCoefficients[stjudentCoef][24], systematicError) + "<br />" +
+    "Mērījuma galīgā absolūta kļūda: " + absoluteErrorFormula(absoluteError) + "<br />" +
     "Relatīva kļūda: " + relativeErrorFormula(measuresAverageValue, absoluteError, relativeError);
 
     // NOTE: Right numbers, left only to display in output window
