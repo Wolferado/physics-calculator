@@ -1,18 +1,20 @@
-import formulas from '../formulas';
+//import {averageFormula, squaredErrorFormula, randomErrorFormula, systematicErrorFormula, absoluteErrorFormula, relativeErrorFormula} from '../formulas';
 
-function CalculatorOutput(props) {
+export default function CalculatorOutput(props) {
     return(
         <div className='output-formulas-container'>
-            <p>
-                Vidējā aritmētiskā kļūda: {formulas.averageFormula(props)} <br/>
-                Vidējā kvadrātiskā kļūda: {formulas.squaredErrorFormula(props)} <br/>
-                Mērījuma absolūta kļūda (gadījuma kļūda): {formulas.randomErrorFormula(props)} <br/>
-                Mērījuma absolūte kļūda (sistemātiskā kļūda): {formulas.systematicErrorFormula(props)} <br/>
-                Mērījuma galīgā absolūta kļūda: {formulas.absoluteErrorFormula(props)} <br/>
-                Relatīva kļūda: {formulas.relativeErrorFormula(props)} <br/>
+            <p className="mathjax-formulas">
+                
             </p>
         </div>
     )
 }
 
-export default CalculatorOutput;
+/**
+                Vidējā aritmētiskā kļūda: {averageFormula(props)} <br/>
+                Vidējā kvadrātiskā kļūda: {squaredErrorFormula(props)} <br/>
+                Mērījuma absolūta kļūda (gadījuma kļūda): {randomErrorFormula(props)} <br/>
+                Mērījuma absolūte kļūda (sistemātiskā kļūda): {systematicErrorFormula(props)} <br/>
+                Mērījuma galīgā absolūta kļūda: {absoluteErrorFormula(props)} <br/>
+                Relatīva kļūda: {relativeErrorFormula(props)} <br/>
+ */

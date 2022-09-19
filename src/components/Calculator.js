@@ -3,6 +3,7 @@ import {useState} from 'react';
 import CalculatorInput from './CalculatorInput';
 import CalculatorSelect from './CalculatorSelect';
 import CalculatorOutput from './CalculatorOutput';
+import {averageFormula, squaredErrorFormula, randomErrorFormula, systematicErrorFormula, absoluteErrorFormula, relativeErrorFormula} from '../formulas';
 
 const stjudentCoefficients = {
   0.70: [1.96, 1.39, 1.25, 1.19, 1.16, 1.13, 1.12, 1.11, 1.10, 1.09, 1.09, 1.08, 1.08, 1.08, 1.07, 1.07, 1.07, 1.07, 1.06, 1.06, 1.06, 1.06, 1.06, 1.06, 1.04],
@@ -17,6 +18,7 @@ function Calculator() {
   const [stjudentCoef, setStjudentCoef] = useState(0.95);
   const [measuresAmount, setMeasuresAmount] = useState(5); 
   const [measurementMin, setMeasurementMin] = useState(0.001);
+  const [measures, setMeasures] = useState([]);
 
   const [measuresAverageValue, setMeasuresAverageValue] = useState(0);
   const [squaredError, setSquaredError] = useState(0);
@@ -36,44 +38,36 @@ function Calculator() {
         arr.push(parseFloat(inputs[i].value));
     }
 
-    return arr;
+    setMeasures(arr);
   }
 
   const getAverageValueFromMeasures = () => {
     let sum = 0;
-    
-    let arr = getInputValues();
 
-    for(let i = 0; i < arr.length; i++) {
-      sum += parseFloat(arr[i]);
+    for(let i = 0; i < measures.length; i++) {
+      sum += parseFloat(measures[i]);
     }
 
-    setMeasuresAverageValue(sum / measuresAmount);
+    setMeasuresAverageValue(parseFloat(sum / measuresAmount));
   }
 
   const getSquaredError = () => {
     let error = 0;
 
-    let arr = getInputValues();
-
-    for(let i = 0; i < arr.length; i++) {
-      let result = parseFloat(arr[i]) - measuresAverageValue;
+    for(let i = 0; i < measures.length; i++) {
+      let result = parseFloat(measures[i]) - measuresAverageValue;
       error += Math.pow(result, 2);
     }
 
-    setSquaredError(Math.sqrt(error / (measuresAmount * (measuresAmount - 1))));
+    setSquaredError(parseFloat(Math.sqrt(error / (measuresAmount * (measuresAmount - 1)))));
   }
 
   const getRandomError = () => {
-    let error = squaredError * stjudentCoefficients[stjudentCoef][measuresAmount - 1];
-
-    setRandomError(parseFloat(error));
+    setRandomError(parseFloat(squaredError * stjudentCoefficients[stjudentCoef][measuresAmount - 1]));
   }
 
   const getSystematicError = () => {
-    let error = measurementMin / 3 * stjudentCoefficients[stjudentCoef][24];
-
-    setSystematicError(parseFloat(error));
+    setSystematicError(parseFloat(measurementMin / 3 * stjudentCoefficients[stjudentCoef][24]));
   }
 
   const getAbsoluteError = () => {
@@ -90,9 +84,7 @@ function Calculator() {
   }
 
   const getRelativeError = () => {
-    let error = absoluteError / measuresAverageValue * 100;
-
-    setRelativeError(parseFloat(error));
+    setRelativeError(parseFloat(absoluteError / measuresAverageValue * 100));
   }
 
   const makeMathOperations = () => {
@@ -104,15 +96,19 @@ function Calculator() {
     getRelativeError();
 
     document.querySelector(".output-formulas-container").style.display = "flex";
-    //document.querySelector(".output-formulas-container p").textContent = "";
+    document.querySelector(".output-formulas-container p").textContent = 
+    "Vidējā aritmētiskā kļūda: " + averageFormula(measures, measuresAmount, measuresAverageValue) +"\n"+ 
+    "Vidējā kvadrātiskā kļūda: " + squaredErrorFormula(measures, measuresAmount, measuresAverageValue, squaredError) + "\n" +
+    "Mērījuma absolūta kļūda (gadījuma kļūda): " + randomErrorFormula(stjudentCoef, squaredError, randomError) + "\n" +
+    "Mērījuma absolūte kļūda (sistemātiskā kļūda): " + systematicErrorFormula(measurementMin, stjudentCoefficients[stjudentCoef][24], systematicError) + "\n" +
+    "Mērījuma galīgā absolūta kļūda: " + absoluteErrorFormula(absoluteError) + "\n" +
+    "Relatīva kļūda: " + relativeErrorFormula(measuresAverageValue, absoluteError, relativeError);
 
     // NOTE: Right numbers, left only to display in output window
     console.log(measuresAverageValue, squaredError, randomError, systematicError, absoluteError, relativeError);
   }
   
-  let measuresInputs = [Array.from({length: measuresAmount}, (_, i) => i + 1).map((measure) => <CalculatorInput key={measure} index={measure} />)];
-
-  let outputWindow = <CalculatorOutput stjudentCoef={stjudentCoef} measurementMin={measurementMin} measures={getInputValues} amount={measuresAmount} maxCoefValue={stjudentCoefficients[stjudentCoef][24]} averageValue={measuresAverageValue} squaredError={squaredError} randomError={randomError} systematicError={systematicError} absoluteError={absoluteError} relativeError={relativeError}/>
+  let measuresInputs = [Array.from({length: measuresAmount}, (_, i) => i + 1).map((measure) => <CalculatorInput key={measure} index={measure} handleChange={getInputValues}/>)];
 
   return (
     <div className="Calculator">
@@ -123,7 +119,7 @@ function Calculator() {
       </div>
       {measuresInputs}
       <button onClick={makeMathOperations}>Aprēķināt</button>
-      {outputWindow}
+      <CalculatorOutput />
     </div>
   );
 }

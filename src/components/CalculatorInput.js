@@ -1,4 +1,4 @@
-function CalculatorInput(props) {
+export default function CalculatorInput(props) {
 
     if(props.index) {
         const labelName = 'measure-' + props.index;
@@ -6,7 +6,7 @@ function CalculatorInput(props) {
         return(
             <>
                 <label htmlFor={labelName}>{props.index}. mērījums</label>
-                <input type='number' name={labelName} onChange={props.handleChange} placeholder='Ievadiet vērtību šeit'/>
+                <input type='number' name={labelName} onChange={props.handleChange} onBlur={props.handleChange} placeholder='Ievadiet vērtību šeit'/>
             </>
         )
     }
@@ -19,5 +19,3 @@ function CalculatorInput(props) {
         )
     }
 }
-
-export default CalculatorInput;

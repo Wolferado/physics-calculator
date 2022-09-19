@@ -1,4 +1,4 @@
-function CalculatorSelect(props) {
+export default function CalculatorSelect(props) {
     let selectOptions = props.options.map((opt) => <option key={opt} name={opt}>{opt}</option>);
 
     return(
@@ -10,5 +10,3 @@ function CalculatorSelect(props) {
         </>
     )
 }
-
-export default CalculatorSelect;
