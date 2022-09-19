@@ -5,20 +5,22 @@ export const averageFormula = (measures, amount, averageValue) => {
         sum += measures[i];
     }
 
-    return("\\(m_{vid}= \\frac{1}{"+amount+"} \\sum_{i=1}^{"+amount+"}\\ m_i= \\frac{"+parseFloat(sum)+"}{"+amount+"} = "+averageValue+" \\)");
+    return("\\(m_{vid}= \\frac{1}{"+amount+"} \\sum_{i=1}^{"+amount+"}\\ m_i= \\frac{"+parseFloat(sum.toFixed(4))+"}{"+amount+"} = "+averageValue+" \\)");
 }
 export const squaredErrorFormula = (measures, amount, averageValue, squaredError) => {
-    let sum = 0;
+    let error = 0;
+    let result;
 
     for(let i = 0; i < measures.length; i++) {
-        sum += (measures[i] - averageValue);
+        result = measures[i] - averageValue;
+        error += Math.pow(result, 2);
     }
 
-    return("\\(s_m = \\sqrt{\\frac{sum_{i=1}^{"+amount+"}(m_i - m_{vid})^2}{"+amount+"("+amount+"-1)}}= \\sqrt\\frac{"+sum+"}{"+(amount * (amount - 1))+"} = "+squaredError+"\\)");
+    return("\\(s_m = \\sqrt{\\frac{sum_{i=1}^{"+amount+"}(m_i - m_{vid})^2}{"+amount+"("+amount+"-1)}}= \\sqrt\\frac{"+error.toFixed(4)+"}{"+(amount * (amount - 1))+"} = "+squaredError+"\\)");
 }
 
-export const randomErrorFormula = (stjudentCoef, squaredError, randomError) => {
-    return("\\(△m_s = s_m * t_Β(n) = "+squaredError+" * "+stjudentCoef+" = "+randomError+" \\)");
+export const randomErrorFormula = (stjudentCoef, stjudentCoefficients, amount, squaredError, randomError) => {
+    return("\\(△m_s = s_m * t_Β(n) = "+squaredError+" * "+stjudentCoefficients[stjudentCoef][amount - 1]+" = "+randomError+" \\)");
 }
 
 export const systematicErrorFormula = (measurementMin, maxCoefValue, systematicError) => {
