@@ -1,11 +1,17 @@
 export const averageFormula = (measures, amount, averageValue) => {
     let sum = 0;
+    let sumStr = "";
 
     for(let i = 0; i < measures.length; i++) {
         sum += measures[i];
+
+        if(i === measures.length - 1) 
+            sumStr += measures[i].toString();
+        else 
+            sumStr += measures[i].toString() + "+ ";
     }
 
-    return("\\(m_{vid}= \\frac{1}{"+amount+"} \\sum_{i=1}^{"+amount+"}\\ m_i= \\frac{"+parseFloat(sum.toFixed(4))+"}{"+amount+"} = "+averageValue+" \\)");
+    return("\\(m_{vid}= \\frac{1}{"+amount+"} \\sum_{i=1}^{"+amount+"}\\ m_i = \\frac{"+sumStr+"}{"+amount+"} =\\frac{"+parseFloat(sum.toFixed(4))+"}{"+amount+"} = "+averageValue+" \\)");
 }
 export const squaredErrorFormula = (measures, amount, averageValue, squaredError) => {
     let error = 0;
@@ -16,7 +22,7 @@ export const squaredErrorFormula = (measures, amount, averageValue, squaredError
         error += Math.pow(result, 2);
     }
 
-    return("\\(s_m = \\sqrt{\\frac{sum_{i=1}^{"+amount+"}(m_i - m_{vid})^2}{"+amount+"("+amount+"-1)}}= \\sqrt\\frac{"+error.toFixed(4)+"}{"+(amount * (amount - 1))+"} = "+squaredError+"\\)");
+    return("\\(s_m = \\sqrt{\\frac{\\sum_{i=1}^{"+amount+"}(m_i - m_{vid})^2}{"+amount+"("+amount+"-1)}}= \\sqrt\\frac{"+error.toFixed(4)+"}{"+(amount * (amount - 1))+"} = "+squaredError+"\\)");
 }
 
 export const randomErrorFormula = (stjudentCoef, stjudentCoefficients, amount, squaredError, randomError) => {
@@ -27,8 +33,13 @@ export const systematicErrorFormula = (measurementMin, maxCoefValue, systematicE
     return("\\(△m_𝛿 = \\frac{𝛿_s}{3}t_Β(\\infty) = \\frac{"+measurementMin+"}{3} * "+maxCoefValue+" = "+systematicError+"\\)");
 }
 
-export const absoluteErrorFormula = (absoluteError) => {
-    return("\\(△m = \\sqrt{△m_s^2 + △m_𝛿^2}\\) vai \\(△m_s >> △m_𝛿 => △m = △m_s = "+absoluteError+"\\)")
+export const absoluteErrorFormula = (randomError, systematicError, absoluteError) => {
+    if(randomError / systematicError >= 3)
+        return("\\(△m_s >> △m_𝛿 => △m = △m_s = "+absoluteError+"\\)");
+    else if(systematicError / randomError >= 3)
+        return("\\(△m_𝛿 >> △m_s => △m = △m_𝛿 = "+absoluteError+"\\)");
+    else
+        return("\\(△m = \\sqrt{△m_s^2 + △m_𝛿^2} = \\sqrt{"+randomError+"^2 + "+systematicError+"^2}\\ = "+absoluteError+"\\)"); 
 }
 
 export const relativeErrorFormula = (averageValue, absoluteError, relativeError) => {

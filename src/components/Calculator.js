@@ -81,7 +81,7 @@ function Calculator() {
     else
       error = Math.sqrt(Math.pow(randomError, 2) + Math.pow(systematicError, 2));
 
-    return(error);
+    return(error.toFixed(4));
   }
 
   const getRelativeError = () => {
@@ -90,7 +90,7 @@ function Calculator() {
     return(result.toFixed(4));
   }
 
-  const makeMathOperations = () => {
+  const outputFormulas = () => {
     measuresAverageValue = getAverageValueFromMeasures();
     squaredError = getSquaredError();
     randomError = getRandomError();
@@ -98,18 +98,17 @@ function Calculator() {
     absoluteError = getAbsoluteError();
     relativeError = getRelativeError();
 
+    const MathJax = window.MathJax;
+
     document.querySelector(".output-formulas-container").style.display = "flex";
     document.querySelector(".output-formulas-container p").innerHTML = 
     "Vidējā aritmētiskā kļūda: " + averageFormula(measures, chosenAmountOfMeasures, measuresAverageValue) +"<br />"+ 
     "Vidējā kvadrātiskā kļūda: " + squaredErrorFormula(measures, chosenAmountOfMeasures, measuresAverageValue, squaredError) + "<br />" +
     "Mērījuma absolūta kļūda (gadījuma kļūda): " + randomErrorFormula(stjudentCoef, stjudentCoefficients, chosenAmountOfMeasures, squaredError, randomError) + "<br />" +
     "Mērījuma absolūte kļūda (sistemātiskā kļūda): " + systematicErrorFormula(measurementMin, stjudentCoefficients[stjudentCoef][24], systematicError) + "<br />" +
-    "Mērījuma galīgā absolūta kļūda: " + absoluteErrorFormula(absoluteError) + "<br />" +
+    "Mērījuma galīgā absolūta kļūda: " + absoluteErrorFormula(randomError, systematicError, absoluteError) + "<br />" +
     "Relatīva kļūda: " + relativeErrorFormula(measuresAverageValue, absoluteError, relativeError);
-
-
-    // NOTE: Right numbers, left only to display in output window
-    console.log(measuresAverageValue, squaredError, randomError, systematicError, absoluteError, relativeError);
+    MathJax.typeset();
   }
   
   const stjudentCoefficients = {
@@ -131,15 +130,10 @@ function Calculator() {
         <CalculatorInput labelName='measurement-min-value' labelValue='Mērinstrumenta mazākā iedaļas vērtība' handleChange={e => setMeasurementMin(e.target.value)} />
       </div>
       {measuresInputs}
-      <button onClick={makeMathOperations}>Aprēķināt</button>
+      <button onClick={outputFormulas}>Aprēķināt</button>
       <CalculatorOutput />
     </div>
   );
 }
-
-/*
-  BUGS:
-  - Values don't change, when changing measures amount.
-*/
 
 export default Calculator;
