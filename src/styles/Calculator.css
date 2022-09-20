@@ -9,6 +9,12 @@
   margin: 1% 20% 10% 20%;
   padding: 20px;
 }
+@media (max-width: 850px) {
+  .Calculator {
+    margin: 10% 5% 10% 5%;
+    width: 80%;
+  }
+}
 .Calculator h1 {
   text-align: center;
   color: #FFFFFF;
@@ -30,9 +36,19 @@
   text-align: center;
   padding: 10px;
 }
+@media (max-width: 1475px) {
+  .Calculator #settings {
+    flex-direction: column;
+  }
+}
 .Calculator label {
   font-size: 24px;
   padding: 5px;
+}
+@media (max-width: 850px) {
+  .Calculator label {
+    font-size: 20px;
+  }
 }
 .Calculator select {
   font-size: 24px;
@@ -42,6 +58,11 @@
 .Calculator select option {
   font-size: 14px;
   display: flex;
+}
+@media (max-width: 850px) {
+  .Calculator select {
+    font-size: 16px;
+  }
 }
 .Calculator #measures-inputs {
   display: flex;
@@ -74,6 +95,11 @@
   background-color: #e4e4e4;
   transition: 1s;
 }
+@media (max-width: 850px) {
+  .Calculator input {
+    font-size: 18px;
+  }
+}
 .Calculator .output-formulas-container {
   display: none;
   flex-direction: column;
@@ -82,6 +108,7 @@
   border-radius: 5px;
   padding: 10px;
   margin-top: 20px;
+  word-wrap: break-word;
 }
 .Calculator .output-formulas-container p {
   font-size: 22px;
@@ -94,6 +121,15 @@
   text-align: start;
   font-family: "Consolas";
   font-weight: 1000;
+}
+@media (max-width: 850px) {
+  .Calculator .output-formulas-container p {
+    font-size: 16px;
+    overflow: scroll;
+  }
+  .Calculator .output-formulas-container p mjx-math {
+    font-size: 13px;
+  }
 }
 .Calculator button {
   font-size: 30px;
@@ -111,4 +147,9 @@
   border: 2px solid #d1bc00;
   transition: 1s;
   cursor: pointer;
+}
+@media (max-width: 850px) {
+  .Calculator button {
+    font-size: 24px;
+  }
 }/*# sourceMappingURL=Calculator.css.map */

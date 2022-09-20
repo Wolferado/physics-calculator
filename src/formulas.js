@@ -1,17 +1,11 @@
 export const averageFormula = (measures, amount, averageValue) => {
     let sum = 0;
-    let sumStr = "";
 
     for(let i = 0; i < measures.length; i++) {
         sum += measures[i];
-
-        if(i === measures.length - 1) 
-            sumStr += measures[i].toString();
-        else 
-            sumStr += measures[i].toString() + "+ ";
     }
 
-    return("\\(m_{vid}= \\frac{1}{"+amount+"} \\sum_{i=1}^{"+amount+"}\\ m_i = \\frac{"+sumStr+"}{"+amount+"} =\\frac{"+parseFloat(sum.toFixed(4))+"}{"+amount+"} = "+averageValue+" \\)");
+    return("\\(m_{vid}= \\frac{1}{"+amount+"} \\sum_{i=1}^{"+amount+"}\\ m_i =\\frac{"+parseFloat(sum.toFixed(4))+"}{"+amount+"} = "+averageValue+" \\)");
 }
 export const squaredErrorFormula = (measures, amount, averageValue, squaredError) => {
     let error = 0;

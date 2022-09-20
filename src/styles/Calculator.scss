@@ -8,6 +8,11 @@
     flex-direction: column;
     margin: 1% 20% 10% 20%;
     padding: 20px;
+
+    @media (max-width: 850px) {
+        margin: 10% 5% 10% 5%;
+        width: 80%;
+    }
     
     h1 {
         text-align: center;
@@ -31,11 +36,19 @@
         display: flex;
         text-align: center;
         padding: 10px;
+
+        @media (max-width: 1475px) {
+            flex-direction: column;
+        }
     }
 
     label {
         font-size: 24px;
         padding: 5px;
+
+        @media (max-width: 850px) {
+            font-size: 20px;
+        }
     }
 
     select {
@@ -45,6 +58,10 @@
         option {
             font-size: 14px;
             display: flex;
+        }
+
+        @media (max-width: 850px) {
+            font-size: 16px;
         }
     }
 
@@ -79,6 +96,10 @@
             background-color: #e4e4e4;
             transition: 1s;
         }
+
+        @media (max-width: 850px) {
+            font-size: 18px;
+        }
     }
 
     .output-formulas-container {
@@ -89,6 +110,7 @@
         border-radius: 5px;
         padding: 10px;
         margin-top: 20px;
+        word-wrap: break-word;
 
         p {
             font-size: 22px;
@@ -101,6 +123,15 @@
             text-align: start;
             font-family: 'Consolas';
             font-weight: 1000;
+
+            @media (max-width: 850px) {
+                font-size: 16px;
+                overflow: scroll;
+
+                mjx-math {
+                    font-size: 13px;
+                }
+            }
         }
     }
 
@@ -120,6 +151,10 @@
             border: 2px solid #d1bc00;
             transition: 1s;
             cursor: pointer;
+        }
+
+        @media (max-width: 850px) {
+            font-size: 24px;
         }
     }
 }
