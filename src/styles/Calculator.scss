@@ -1,5 +1,6 @@
 .Calculator {
-    background-color: gray;
+    background-color: #000000;
+    border: 2px solid #777777;
     border-radius: 5px;
     width: 60%;
     height: 80%;
@@ -7,10 +8,29 @@
     flex-direction: column;
     margin: 1% 20% 10% 20%;
     padding: 20px;
+    
+    h1 {
+        text-align: center;
+        color: #FFFFFF;
+        text-shadow: 3px 3px 0px #777777;
+        text-transform: capitalize;
+    }
 
-    div {
+    h2 {
+        color: #FFFFFF;
+        text-shadow: 2px 2px 2px #777777;
+        margin: 5px;
+        padding: 5px;
+    }
+
+    #settings {
+        color: #FFFFFF;
+        background-color: #242424;
+        border: 1px solid #777777;
+        border-radius: 5px;
         display: flex;
         text-align: center;
+        padding: 10px;
     }
 
     label {
@@ -21,42 +41,85 @@
     select {
         font-size: 24px;
         border-radius: 5px;
+        padding: 5px;
         option {
             font-size: 14px;
             display: flex;
-            position: absolute;
-            left: 200px;
+        }
+    }
+
+    #measures-inputs {
+        display: flex;
+        flex-direction: column;
+        background-color: #242424;
+        border: 2px solid #777777;
+        padding: 10px;
+        border-radius: 5px;
+
+        label {
+            color: #FFFFFF;
         }
     }
 
     input {
         font-size: 24px;
         padding: 5px;
+        padding-left: 15px;
         border-radius: 5px;
+        appearance: none;
+        background-color: #FEFEFE;
+        transition: 1s;
+        
+        &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+            appearance: none;
+        }
+
+        &:focus {
+            border: none;
+            background-color: #e4e4e4;
+            transition: 1s;
+        }
     }
 
     .output-formulas-container {
         display: none;
         flex-direction: column;
+        background-color: #242424;
+        border: 2px solid #777777;
+        border-radius: 5px;
+        padding: 10px;
+        margin-top: 20px;
+
         p {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 500;
             line-height:5vh;
-            background-color: white;
+            background-color: #749787;
             border-radius: 5px;
             padding: 5px;
+            padding-left: 20px;
+            text-align: start;
+            font-family: 'Consolas';
+            font-weight: 1000;
         }
     }
 
     button {
         font-size: 30px;
+        font-weight: 600;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         padding: 15px;
         margin-top: 20px;
         border-radius: 5px;
+        background-color: #fff239;
+        border: 2px solid #5e4800;
+        transition: 1s;
 
         &:hover {
-            background-color: whitesmoke;
-            border: 2px solid white;
+            background-color: #cea110;
+            border: 2px solid #d1bc00;
+            transition: 1s;
+            cursor: pointer;
         }
     }
 }

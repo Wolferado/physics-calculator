@@ -1,5 +1,6 @@
 .Calculator {
-  background-color: gray;
+  background-color: #000000;
+  border: 2px solid #777777;
   border-radius: 5px;
   width: 60%;
   height: 80%;
@@ -8,9 +9,26 @@
   margin: 1% 20% 10% 20%;
   padding: 20px;
 }
-.Calculator div {
+.Calculator h1 {
+  text-align: center;
+  color: #FFFFFF;
+  text-shadow: 3px 3px 0px #777777;
+  text-transform: capitalize;
+}
+.Calculator h2 {
+  color: #FFFFFF;
+  text-shadow: 2px 2px 2px #777777;
+  margin: 5px;
+  padding: 5px;
+}
+.Calculator #settings {
+  color: #FFFFFF;
+  background-color: #242424;
+  border: 1px solid #777777;
+  border-radius: 5px;
   display: flex;
   text-align: center;
+  padding: 10px;
 }
 .Calculator label {
   font-size: 24px;
@@ -19,37 +37,78 @@
 .Calculator select {
   font-size: 24px;
   border-radius: 5px;
+  padding: 5px;
 }
 .Calculator select option {
   font-size: 14px;
   display: flex;
-  position: absolute;
-  left: 200px;
+}
+.Calculator #measures-inputs {
+  display: flex;
+  flex-direction: column;
+  background-color: #242424;
+  border: 2px solid #777777;
+  padding: 10px;
+  border-radius: 5px;
+}
+.Calculator #measures-inputs label {
+  color: #FFFFFF;
 }
 .Calculator input {
   font-size: 24px;
   padding: 5px;
+  padding-left: 15px;
   border-radius: 5px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #FEFEFE;
+  transition: 1s;
+}
+.Calculator input::-webkit-inner-spin-button, .Calculator input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+          appearance: none;
+}
+.Calculator input:focus {
+  border: none;
+  background-color: #e4e4e4;
+  transition: 1s;
 }
 .Calculator .output-formulas-container {
   display: none;
   flex-direction: column;
+  background-color: #242424;
+  border: 2px solid #777777;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 20px;
 }
 .Calculator .output-formulas-container p {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 500;
   line-height: 5vh;
-  background-color: white;
+  background-color: #749787;
   border-radius: 5px;
   padding: 5px;
+  padding-left: 20px;
+  text-align: start;
+  font-family: "Consolas";
+  font-weight: 1000;
 }
 .Calculator button {
   font-size: 30px;
+  font-weight: 600;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   padding: 15px;
   margin-top: 20px;
   border-radius: 5px;
+  background-color: #fff239;
+  border: 2px solid #5e4800;
+  transition: 1s;
 }
 .Calculator button:hover {
-  background-color: whitesmoke;
-  border: 2px solid white;
+  background-color: #cea110;
+  border: 2px solid #d1bc00;
+  transition: 1s;
+  cursor: pointer;
 }/*# sourceMappingURL=Calculator.css.map */

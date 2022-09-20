@@ -19,7 +19,7 @@ function Calculator() {
   let relativeError = 0;
 
   const getInputValues = () => {
-    let inputs = document.querySelectorAll(".Calculator > input");
+    let inputs = document.querySelectorAll(".Calculator #measures-inputs input");
     let arr = [];
 
     for(let i = 0; i < inputs.length; i++) {
@@ -81,7 +81,9 @@ function Calculator() {
     else
       error = Math.sqrt(Math.pow(randomError, 2) + Math.pow(systematicError, 2));
 
-    return(error.toFixed(4));
+    let result = parseFloat(error);
+
+    return(result.toFixed(4));
   }
 
   const getRelativeError = () => {
@@ -118,18 +120,22 @@ function Calculator() {
   };
   
   const amountOfMeasures = Array.from({length: 24}, (_, i) => i + 2);
-  amountOfMeasures.push("Inf");
   
-  let measuresInputs = [Array.from({length: chosenAmountOfMeasures}, (_, i) => i + 1).map((measure) => <CalculatorInput key={measure} index={measure} handleChange={getInputValues}/>)];
+  let measuresInputs = [Array.from({length: chosenAmountOfMeasures}, (_, i) => i + 1).map((measure) => <CalculatorInput key={measure} index={measure} handleChange={getInputValues} />)];
 
   return (
     <div className="Calculator">
-      <div>
+      <h1>Kļūdu kalkulators fizikai</h1>
+      <h2>Uzstadījumi</h2>
+      <div id='settings'>
         <CalculatorSelect labelId='stjudent-coef' labelName='Stjudenta koeficients' default={0.95} options={Object.keys(stjudentCoefficients)} handleChange={e => setStjudentCoef(e.target.value)}/>
         <CalculatorSelect labelId='measures-amount' labelName='Mērījumu skaits' default={5} options={amountOfMeasures} handleChange={e => setchosenAmountOfMeasures(e.target.value)}/>
         <CalculatorInput labelName='measurement-min-value' labelValue='Mērinstrumenta mazākā iedaļas vērtība' handleChange={e => setMeasurementMin(e.target.value)} />
       </div>
-      {measuresInputs}
+      <h2>Mērījumi</h2>
+      <div id='measures-inputs'>
+        {measuresInputs}
+      </div>
       <button onClick={outputFormulas}>Aprēķināt</button>
       <CalculatorOutput />
     </div>

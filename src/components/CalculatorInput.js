@@ -6,7 +6,7 @@ export default function CalculatorInput(props) {
         return(
             <>
                 <label htmlFor={labelName}>{props.index}. mērījums</label>
-                <input type='number' name={labelName} onChange={props.handleChange} onBlur={props.handleChange} placeholder='Ievadiet vērtību šeit'/>
+                <input type='number' name={labelName} onChange={props.handleChange} onBlur={props.handleChange} onKeyDown={preventArrowsAction} placeholder='Ievadiet vērtību šeit...'/>
             </>
         )
     }
@@ -14,8 +14,13 @@ export default function CalculatorInput(props) {
         return(
             <>
                 <label htmlFor={props.labelName}>{props.labelValue}</label>
-                <input type='number' name={props.labelName} defaultValue={0.001} onChange={props.handleChange} placeholder='Ievadiet vērtību šeit'/>
+                <input type='number' name={props.labelName} defaultValue={0.001} onKeyDown={preventArrowsAction} onChange={props.handleChange} placeholder='Ievadiet vērtību šeit...'/>
             </>
         )
     }
+}
+
+const preventArrowsAction = (e) => {
+    if(e.which === 38 || e.which === 40)
+        e.preventDefault();
 }
