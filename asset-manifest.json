@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/physics-calculator/static/css/main.9274d2fa.css",
-    "main.js": "/physics-calculator/static/js/main.8813f49a.js",
+    "main.css": "/physics-calculator/static/css/main.532dd66c.css",
+    "main.js": "/physics-calculator/static/js/main.50ea469b.js",
     "static/media/Physics_equations.png": "/physics-calculator/static/media/Physics_equations.1899b0b72aa7b5b1a456.png",
     "index.html": "/physics-calculator/index.html",
-    "main.9274d2fa.css.map": "/physics-calculator/static/css/main.9274d2fa.css.map",
-    "main.8813f49a.js.map": "/physics-calculator/static/js/main.8813f49a.js.map"
+    "main.532dd66c.css.map": "/physics-calculator/static/css/main.532dd66c.css.map",
+    "main.50ea469b.js.map": "/physics-calculator/static/js/main.50ea469b.js.map"
   },
   "entrypoints": [
-    "static/css/main.9274d2fa.css",
-    "static/js/main.8813f49a.js"
+    "static/css/main.532dd66c.css",
+    "static/js/main.50ea469b.js"
   ]
 }
