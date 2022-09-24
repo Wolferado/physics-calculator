@@ -28,14 +28,23 @@
         padding: 5px;
     }
 
-    #settings {
+    #settings-table {
         color: #FFFFFF;
         background-color: #242424;
-        border: 1px solid #777777;
+        border-collapse: collapse;
         border-radius: 5px;
-        display: flex;
-        text-align: center;
-        padding: 10px;
+        box-shadow: inset 1px 1px 0px 1px #777777, 1px 1px 0px 1px #777777;
+        text-align: left;
+
+        td {
+            padding: 6px;
+        }
+
+        td:nth-child(2n) {
+            input {
+                width: 70%;
+            }
+        }
 
         @media (max-width: 1475px) {
             flex-direction: column;
@@ -44,7 +53,6 @@
 
     label {
         font-size: 24px;
-        padding: 5px;
 
         @media (max-width: 850px) {
             font-size: 20px;
@@ -55,6 +63,7 @@
         font-size: 24px;
         border-radius: 5px;
         padding: 5px;
+
         option {
             font-size: 14px;
             display: flex;
@@ -69,8 +78,8 @@
         display: flex;
         flex-direction: column;
         background-color: #242424;
-        border: 2px solid #777777;
         padding: 10px;
+        box-shadow: inset 1px 1px 0px 1px #777777, 1px 1px 0px 1px #777777;
         border-radius: 5px;
 
         label {
@@ -87,6 +96,14 @@
         background-color: #FEFEFE;
         transition: 1s;
         
+        &[type='checkbox'] {
+            transform: scale(1.5);
+            padding: auto;
+            padding-left: auto;
+            border-radius: auto;
+            appearance: auto;
+        }
+
         &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
             appearance: none;
         }

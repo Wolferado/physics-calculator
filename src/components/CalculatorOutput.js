@@ -1,5 +1,3 @@
-//import {averageFormula, squaredErrorFormula, randomErrorFormula, systematicErrorFormula, absoluteErrorFormula, relativeErrorFormula} from '../formulas';
-
 export default function CalculatorOutput(props) {
     return(
         <div className='output-formulas-container'>

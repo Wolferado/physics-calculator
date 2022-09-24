@@ -23,7 +23,12 @@ export const randomErrorFormula = (stjudentCoef, stjudentCoefficients, amount, s
     return("\\(△m_s = s_m * t_Β(n) = "+squaredError+" * "+stjudentCoefficients[stjudentCoef][amount - 1]+" = "+randomError+" \\)");
 }
 
-export const systematicErrorFormula = (measurementMin, maxCoefValue, systematicError) => {
+export const systematicErrorFormula = (measurementMin, maxCoefValue, systematicError, isInstrumentAnalog, isPrecisionClass, precisionClass, measurementVolume) => {
+    if(isInstrumentAnalog && !isPrecisionClass)
+        return("\\(△m_𝛿 = \\frac{𝛿_s / 2}{3}t_Β(\\infty) = \\frac{"+measurementMin / 2+"}{3} * "+maxCoefValue+" = "+systematicError+"\\)");
+    else if(isPrecisionClass) 
+        return("\\(△m_𝛿 = \\frac{\\frac{γ}{100}*m_0}{3}t_Β(\\infty) = \\frac{"+precisionClass / 100 * measurementVolume+"}{3} * "+maxCoefValue+" = "+systematicError+"\\)")
+
     return("\\(△m_𝛿 = \\frac{𝛿_s}{3}t_Β(\\infty) = \\frac{"+measurementMin+"}{3} * "+maxCoefValue+" = "+systematicError+"\\)");
 }
 
