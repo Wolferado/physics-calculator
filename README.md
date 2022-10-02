@@ -28,4 +28,6 @@ Kalkulators izveidots tieši kļūdu aprēķinām _(vidēja aritmētiskā, vidē
 
 Kalkulators ir pieejams [šeit][Kalkulators].
 
+_Piezīme: Kalkulatorā ir iespējams satikt kļūdas. Kļūdas satikšanas gadījumā - izveidot "Issue" vai rakstīt privāti._
+
 [Kalkulators]: https://wolferado.github.io/physics-calculator/
