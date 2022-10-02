@@ -68,7 +68,7 @@ function Calculator() {
   }
 
   const getRandomError = () => {
-    let result = squaredError * stjudentCoefficients[stjudentCoef][chosenAmountOfMeasures - 1];
+    let result = squaredError * stjudentCoefficients[stjudentCoef][chosenAmountOfMeasures - 2];
 
     return(result.toFixed(4));
   }

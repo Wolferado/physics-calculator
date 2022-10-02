@@ -20,7 +20,7 @@ export const squaredErrorFormula = (measures, amount, averageValue, squaredError
 }
 
 export const randomErrorFormula = (stjudentCoef, stjudentCoefficients, amount, squaredError, randomError) => {
-    return("\\(△m_s = s_m * t_Β(n) = "+squaredError+" * "+stjudentCoefficients[stjudentCoef][amount - 1]+" = "+randomError+" \\)");
+    return("\\(△m_s = s_m * t_Β("+amount+") = "+squaredError+" * "+stjudentCoefficients[stjudentCoef][amount - 2]+" = "+randomError+" \\)");
 }
 
 export const systematicErrorFormula = (measurementMin, maxCoefValue, systematicError, isInstrumentAnalog, isPrecisionClass, precisionClass, measurementVolume) => {
