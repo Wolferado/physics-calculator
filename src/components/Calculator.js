@@ -152,8 +152,8 @@ function Calculator() {
   // If precision class is needed, display necessary inputs.
   if(isPrecisionClass) {
     precisionAndVolumeInputs = <>
-      <tr><CalculatorTableInput labelName='precision-class-value' labelValue='Mērinstrumenta precizitātes klase' defaultValue={0.5} handleChange={e => setPrecisionClass(e.target.value)} /></tr>
-      <tr><CalculatorTableInput labelName='measurement-volume' labelValue='Mērinsturmenta mērapjoms' defaultValue={150} handleChange={e => setMeasurementVolume(e.target.value)} /></tr>
+      <tr><CalculatorTableInput labelName='precision-class-value' labelValue='Mērinstrumenta precizitātes klase' defaultValue={0.5} handleChange={e => setPrecisionClass(e.target.value)} tooltipText="Rakstiet šeit Jūsu mērinstrumenta precizitātes klasi."/></tr>
+      <tr><CalculatorTableInput labelName='measurement-volume' labelValue='Mērinsturmenta mērapjoms' defaultValue={150} handleChange={e => setMeasurementVolume(e.target.value)} tooltipText="Rakstiet šeit Jūsu mērinstrumenta mērapjomu (maksimālo iespējamo vērtību, kuru var nolasīt no mērinstrumenta)."/></tr>
     </>;
   }
   else
@@ -165,11 +165,11 @@ function Calculator() {
       <h2>Uzstadījumi</h2>
       <table id='settings-table'>
         <tbody>
-          <tr><CalculatorSelect labelId='stjudent-coef' labelName='Stjudenta koeficients' default={0.95} options={Object.keys(stjudentCoefficients)} handleChange={e => setStjudentCoef(e.target.value)}/></tr>
-          <tr><CalculatorSelect labelId='measures-amount' labelName='Mērījumu skaits' default={5} options={amountOfMeasures} handleChange={e => setchosenAmountOfMeasures(e.target.value)}/></tr>
-          <tr><CalculatorTableInput labelName='measurement-min-value' labelValue='Mērinstrumenta mazākā iedaļas vērtība' defaultValue={0.001} handleChange={e => setMeasurementMin(e.target.value)} /></tr>
-          <tr><CalculatorTableInput labelName='checkbox-is-instrument-analog' checkbox={true} labelValue='Vai mērinstruments ir analogs?' handleChange={e => setIsInstrumentAnalog(e.target.checked)} /></tr>
-          <tr><CalculatorTableInput labelName='checkbox-is-precision-class' checkbox={true} labelValue='Vai mērinstrumentam ir precizitātes klase?' handleChange={e => setIsPrecisionClass(e.target.checked)} /></tr>
+          <tr><CalculatorSelect labelId='stjudent-coef' labelName='Stjudenta koeficients' default={0.95} options={Object.keys(stjudentCoefficients)} handleChange={e => setStjudentCoef(e.target.value)} tooltipText="Stjudenta koeficients ir atradams fizikas materiālos. Bieži tiek izmantots 0.95."/></tr>
+          <tr><CalculatorSelect labelId='measures-amount' labelName='Mērījumu skaits' default={5} options={amountOfMeasures} handleChange={e => setchosenAmountOfMeasures(e.target.value)} tooltipText="Izvēlēties Jūsu mērījumu skaitu (ievadlauku skaits mērījumiem tiks izmainīts automātiski)."/></tr>
+          <tr><CalculatorTableInput labelName='measurement-min-value' labelValue='Mērinstrumenta mazākā iedaļas vērtība' defaultValue={0.001} handleChange={e => setMeasurementMin(e.target.value)} tooltipText="Mazākā iedaļas vērtība ir nolasama no mērinstrumenta (lineāla mazākā iedaļas vērtība ir 1 mm, kas pārveidojot metros ir 0,001 m)." /></tr>
+          <tr><CalculatorTableInput labelName='checkbox-is-instrument-analog' checkbox={true} labelValue='Vai mērinstruments ir analogs? (atzīmēt arī, ja nav nonija skala)' handleChange={e => setIsInstrumentAnalog(e.target.checked)} tooltipText="Ja rezultāts ir paradīts elektroniski vai mērinstrumentam nav nonija skala, tad to jāatzīmē."/></tr>
+          <tr><CalculatorTableInput labelName='checkbox-is-precision-class' checkbox={true} labelValue='Vai mērinstrumentam ir precizitātes klase?' handleChange={e => setIsPrecisionClass(e.target.checked)} tooltipText="Ja Jūsu mērinstrumentam ir precizitātes klase, tad ieteicams to atzīmēt (būs parādīti jauni ievadlauki)."/></tr>
           {precisionAndVolumeInputs}
         </tbody>
       </table>

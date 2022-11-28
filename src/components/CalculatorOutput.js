@@ -1,3 +1,5 @@
+// React Component to output solved formulas with
+
 export default function CalculatorOutput(props) {
     return(
         <div className='output-formulas-container'>
@@ -8,6 +10,7 @@ export default function CalculatorOutput(props) {
     )
 }
 
+// Formulas that had to be used
 /**
                 Vidējā aritmētiskā kļūda: {averageFormula(props)} <br/>
                 Vidējā kvadrātiskā kļūda: {squaredErrorFormula(props)} <br/>

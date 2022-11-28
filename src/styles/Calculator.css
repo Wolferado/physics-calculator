@@ -30,13 +30,13 @@
 .Calculator #settings-table {
   color: #FFFFFF;
   background-color: #242424;
-  border-collapse: collapse;
   border-radius: 5px;
   box-shadow: inset 1px 1px 0px 1px #777777, 1px 1px 0px 1px #777777;
   text-align: left;
+  padding-bottom: 20px;
 }
 .Calculator #settings-table td {
-  padding: 6px;
+  padding: 5px;
 }
 .Calculator #settings-table td:nth-child(2n) input {
   width: 70%;
@@ -48,6 +48,7 @@
 }
 .Calculator label {
   font-size: 24px;
+  text-justify: center;
 }
 @media (max-width: 850px) {
   .Calculator label {
@@ -58,6 +59,7 @@
   font-size: 24px;
   border-radius: 5px;
   padding: 5px;
+  width: 75%;
 }
 .Calculator select option {
   font-size: 14px;
@@ -66,6 +68,7 @@
 @media (max-width: 850px) {
   .Calculator select {
     font-size: 16px;
+    width: 100%;
   }
 }
 .Calculator #measures-inputs {
@@ -165,4 +168,35 @@
   .Calculator button {
     font-size: 24px;
   }
+}
+.Calculator .tooltip {
+  margin: 10px;
+  transition-duration: 0.5s;
+}
+.Calculator .tooltip .tooltip-text {
+  transition-duration: 0.5s;
+  visibility: hidden;
+  opacity: 0;
+  font-size: 12px;
+  position: absolute;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+@media (max-width: 850px) {
+  .Calculator .tooltip .tooltip-text {
+    width: 50%;
+    background: rgb(0, 0, 0);
+  }
+}
+.Calculator .tooltip:hover, .Calculator .tooltip:active {
+  transition-duration: 0.5s;
+  color: #777777;
+  cursor: help;
+}
+.Calculator .tooltip:hover .tooltip-text, .Calculator .tooltip:active .tooltip-text {
+  transition-duration: 0.5s;
+  visibility: visible;
+  opacity: 1;
+  color: #FFFFFF;
 }/*# sourceMappingURL=Calculator.css.map */

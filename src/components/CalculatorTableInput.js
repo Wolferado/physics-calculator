@@ -1,30 +1,44 @@
+// React Component to receive an input that isn't a measure
+
+import CalculatorTooltip from "./CalculatorTooltip";
+
 export default function CalculatorTableInput(props) {
 
-    if(props.index) {
-        const labelName = 'measure-' + props.index;
-    
-        return(
-            <>
-                <td><label htmlFor={labelName}>{props.index}. mērījums</label></td>
-                <td><input type='number' name={labelName} onChange={props.handleChange} onBlur={props.handleChange} onKeyDown={preventArrowsAction} placeholder='Ievadiet vērtību šeit...'/></td>
-            </>
-        )
-    }
-    else if(props.checkbox) {
-        return(
-            <>
-                <td><label htmlFor={props.labelName}>{props.labelValue}</label></td>
-                <td><input type='checkbox' name={props.labelName} onKeyDown={preventArrowsAction} onChange={props.handleChange}/></td>
-            </>
-        )
+    if(props.tooltipText) {
+        if(props.checkbox) {
+            return(
+                <>
+                    <td><label htmlFor={props.labelName}>{props.labelValue} <CalculatorTooltip text={props.tooltipText} /></label></td>
+                    <td><input type='checkbox' name={props.labelName} onKeyDown={preventArrowsAction} onChange={props.handleChange}/></td>
+                </>
+            )
+        }
+        else {
+            return(
+                <>
+                    <td><label htmlFor={props.labelName}>{props.labelValue} <CalculatorTooltip text={props.tooltipText} /></label></td>
+                    <td><input type='number' name={props.labelName} defaultValue={props.defaultValue} onKeyDown={preventArrowsAction} onChange={props.handleChange} placeholder='Ievadiet vērtību šeit...'/></td>
+                </>
+            )
+        }
     }
     else {
-        return(
-            <>
-                <td><label htmlFor={props.labelName}>{props.labelValue}</label></td>
-                <td><input type='number' name={props.labelName} defaultValue={props.defaultValue} onKeyDown={preventArrowsAction} onChange={props.handleChange} placeholder='Ievadiet vērtību šeit...'/></td>
-            </>
-        )
+        if(props.checkbox) {
+            return(
+                <>
+                    <td><label htmlFor={props.labelName}>{props.labelValue}</label></td>
+                    <td><input type='checkbox' name={props.labelName} onKeyDown={preventArrowsAction} onChange={props.handleChange}/></td>
+                </>
+            )
+        }
+        else {
+            return(
+                <>
+                    <td><label htmlFor={props.labelName}>{props.labelValue}</label></td>
+                    <td><input type='number' name={props.labelName} defaultValue={props.defaultValue} onKeyDown={preventArrowsAction} onChange={props.handleChange} placeholder='Ievadiet vērtību šeit...'/></td>
+                </>
+            )
+        }
     }
 }
 
