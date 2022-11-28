@@ -32,4 +32,6 @@ Kalkulators ir pieejams [šeit][Kalkulators].
 - Kalkulatorā ir iespējams satikt kļūdas. Kļūdas satikšanas gadījumā - izveidot "Issue" vai rakstīt privāti.
 - Kalkulators izmanto parasto metodi kļūdu aprēķināšanai. Kalkulators nespēj pārciāli atvasināt un tā veidā meklēt kļūdas.
 
+_Piezīme: Kalkulatorā ir iespējams satikt kļūdas. Kļūdas satikšanas gadījumā - izveidot "Issue" vai rakstīt privāti._
+
 [Kalkulators]: https://wolferado.github.io/physics-calculator/
