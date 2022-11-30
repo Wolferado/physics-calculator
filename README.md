@@ -5,7 +5,7 @@ Kalkulators izveidots tieši kļūdu aprēķinām _(vidēja aritmētiskā, vidē
 ## Izskats:
 
 <div align=center>
-    <img src="./src/assets/PC_view.jpeg" width="80%" border=2px>
+    <img src="./src/assets/PC_view.jpeg" width="80%">
     <img src="./src/assets/Mobile_inputs.png" width="40%">
     <img src="./src/assets/Mobile_results.png" width="40%">
 </div>
@@ -31,7 +31,5 @@ Kalkulators ir pieejams [šeit][Kalkulators].
 ### _Piezīmes:_
 - Kalkulatorā ir iespējams satikt kļūdas. Kļūdas satikšanas gadījumā - izveidot "Issue" vai rakstīt privāti.
 - Kalkulators izmanto parasto metodi kļūdu aprēķināšanai. Kalkulators nespēj pārciāli atvasināt un tā veidā meklēt kļūdas.
-
-_Piezīme: Kalkulatorā ir iespējams satikt kļūdas. Kļūdas satikšanas gadījumā - izveidot "Issue" vai rakstīt privāti._
 
 [Kalkulators]: https://wolferado.github.io/physics-calculator/
